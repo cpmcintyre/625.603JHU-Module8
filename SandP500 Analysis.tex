@@ -1,0 +1,670 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+\title{Statistical methods: Homework 8}
+\author{Cameron McIntyre}
+\date{October 22, 2018}
+
+    \begin{document}
+    
+    
+    \maketitle
+    \section{5.2.4}
+Suppose a random sample of size n is drawn from the probability model
+
+\begin{align*}
+    p_X(k;\theta) = \frac{\theta^{2k}e^{-\theta^2}}{k!}, \ k= 0, 1, 2, ...
+\end{align*}
+
+Find a formula for the maximum likelihood estimator, $\hat{\theta}$
+\textbf{Answer:}
+
+$$L_p(\theta)=\Pi \frac{\theta^{2k}e^{-\theta^2}}{k!}=\frac{\theta^{2n\sum k}e^{-n\theta^2}}{k!}$$
+$$ln(L_p(\theta))=2n\sum k ln(\theta)-n\theta^2ln(e)$$
+We differentiate and set it to 0,
+$$\frac{d}{d\theta}ln(L_p(\theta))=\frac{2n\sum k}{\theta}-2n\theta^2ln(e)=0 \leftrightarrow n\theta^2= \sum k$$
+
+$$\hat{\theta}=\sqrt{\bar{K}}$$
+\section{5.2.8}
+
+The following data show the number of occupants in passenger cars observed during one hour at a busy intersection in Los Angeles (75). Suppose it can be assumed that these data follow a geometric distribution $p_X(k;p) = (1-p)^{k-1}p, \ k = 1, 2, ...$. Estimate $p$ and compare the observed and expected frequencies for each value of $X$. 
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{c c} 
+ \hline
+Number of Occupants & Frequency \\ [0.5ex] 
+ \hline
+ 1 & 678 \\ 
+ 2 & 227 \\
+ 3 & 56 \\
+ 4 & 28 \\
+ 5 & 8 \\ 
+ 6+ &\text{\underline{ 14 }}\\ 
+  & 1011\\
+ [1ex] 
+ \hline
+ \end{tabular}
+\end{table}
+\textbf{Answer:}
+
+$$L_p(p)=\Pi_{i=1}^k(1-p)^{k-1}p=(1-p)^{\sum k-n}p^n$$
+$$\frac{d}{d\theta} ln(L_p(p))=\frac{d}{d\theta}(\sum k_i -n)ln(1-p)+nln(p)=\frac{-\sum k_i+n}{1-p}+\frac{n}{p}$$
+Set it to 0,
+$$0=\frac{-\sum k_i+n}{1-p}+\frac{n}{p} \leftrightarrow \hat{p}=\frac{\sum k_i}{n}$$
+
+$$\hat{p}=\frac{1011}{1*678+2*227+3*56+4*28+5*8+6*14}=\frac{1011}{1536} = .658$$
+
+Comparing to the data.
+\begin{table}[h!]
+\centering
+ \begin{tabular}{c c c} 
+ \hline
+Number of Occupants & Frequency & Predicted Amount\\ [0.5ex] 
+ \hline
+ 1 & 678 & 665 \\ 
+ 2 & 227 &227\\
+ 3 & 56 & 78\\
+ 4 & 28 & 27\\
+ 5 & 8 & 9\\ 
+ 6+ &\text{\underline{ 14 }}& 3\\ 
+  & 1011\\
+ [1ex] 
+ \hline
+ \end{tabular}
+\end{table}
+\section{5.2.12} 
+A random sample of size $n$ is taken from the pdf
+
+\begin{align*}
+    f_Y(y; \theta) = \frac{2y}{\theta^2}, \ 0 \leq y \leq \theta
+\end{align*}
+
+Find an expression for $\hat{\theta}$, the maximum likelihood estimator for $\theta$. 
+
+\textbf{Answer:}
+
+$$L_p(\theta) = \Pi_{i=0}^{n}\frac{2y}{\theta^2}=\frac{2^ny^n}{\theta^{2n}} \leftrightarrow \frac{d}{d\theta}L_p(\theta) = -2n\frac{2^ny^n}{\theta^{2n-1}} $$
+
+Setting this to 0,
+$$2n\frac{2^ny^n}{\theta^{2n-1}}= 0$$
+this expression is maximized when  $\theta \rightarrow \infty$. Therefore our maximum likelihood estimator is $\hat{\theta} = Y_{max}$.
+
+\section{5.2.22}
+Find a formula for the method of moments estimate for the parameter $\theta$ in the Pareto pdf, 
+
+\begin{align*}
+    f_Y(y; \theta) &= \theta k^{\theta} \Bigg(\frac{1}{y}\Bigg)^{\theta + 1}, \ y \geq k;\ \theta \geq 1
+\end{align*}
+
+Assume that $k$ is known and that the data consist of a random sample of size $n$. Compare your answer to the maximum likelihood estimator found in Question 5.2.13.
+
+\textbf{Answer:}
+$$E[Y]=\int_{k}^{\infty}y\theta k^{\theta}\frac{1}{y}^{\theta +1}=\theta k^{\theta}\int_{k}^{\infty}\Big(\frac{1}{y}\Big)^{\theta}=\theta k^{\theta}\Big[0 +\frac{k\frac{1}{k}^\theta}{\theta -1} \Big]$$
+$$E[Y] = \frac{\theta k }{\theta - 1}$$
+
+Using Method of Moments:
+$$\bar{Y}= \frac{\theta k }{\theta - 1} \leftrightarrow \hat{\theta} = \frac{\bar{y}}{\bar{y}-k}$$
+
+Now we need to find the M.L.E.:
+$$L_p(\theta)=\Pi \theta k^{\theta} \frac{1}{y_i}^{\theta+1}=\theta^n k^{n\theta}(\Pi y_i)^{-(\theta+1}$$
+
+Taking log and derivative:
+$$\frac{d}{d\theta}ln(L_p(\theta))=\frac{n}{\theta}+nln(k) - nln(\Pi y_i)$$
+
+Set it to 0,
+$$\frac{n}{\theta}+nln(k) - nln(\Pi y_i)= 0 \leftrightarrow \hat{\theta}=\frac{n}{ln(\Pi y_i) - nln(k)}$$
+\newline
+\newline
+\newline
+The Method of moments estimator $\hat{\theta} = \frac{\bar{y}}{\bar{y}-k}$ is not equal to the maximum likelihood estimator $\hat{\theta}=\frac{n}{ln(\Pi y_i) - nln(k)}$.
+
+\section{5.3.10}
+In 1927, the year he hit sixty home runs, Babe Ruth batted .356, having collected 192 hits in 540 official at-bats (150). Based on his performance that season, construct a 95\% confidence interval for Ruth?s probability of getting a hit in a future at-bat.
+
+\textbf{Answer:}
+$$ \hat{\mu} = .356$$
+$$\hat{\sigma} = sqrt{540 * .356 * .644}=8.25$$
+Therfore our confidence interval is,
+$$.356 +-1.96* \sqrt{\frac{.356(1-.356)}{540}}$$
+$$(.3156,.3964)$$
+
+\section{5.3.14}
+If $(0.57,0.63)$ is a 50\% confidence interval for $p$, what does $\frac{k}{n}$ equal, and how many observations were taken?
+
+\textbf{Answer:}
+
+$$(1) \ \frac{k}{n} + .67\sqrt{\frac{\frac{k}{n}(1-\frac{k}{n})}{n}} = .63$$
+$$(2) \ \frac{k}{n} - .67\sqrt{\frac{\frac{k}{n}(1-\frac{k}{n})}{n}} = .57$$
+
+Add 1 to 2
+$$\frac{k}{n}*2 = 1.2 \leftrightarrow = \frac{k}{n} = \frac{1.2}{2}=.6$$
+
+Now we substitute to find n.
+
+$$ .6  + .67\sqrt{\frac{.6(.4)}{n}} = .63$$
+$$n=10.88^2=119$$
+
+\section{5.3.26}
+Suppose that p is to be estimated by $\frac{X}{n}$ and we are willinng to assume that the true p will not be greater than .4. What is the smallest n for which $\frac{X}{n}$ will have a 99\% probability of being within 0.05 of p?
+
+\textbf{Answer:}
+The formula for n is:
+$$n = \frac{z_{frac{\alpha}{2}}}{d^2}r_1(1-r_1)=\frac{2.58^2}{.05^2}.4*.6=640$$
+
+\section{5.4.7}
+Let Y be the random variable described in Example 5.2.4, where $f_Y(y; \theta) = e^{-(y-\theta)}, y \geq \theta, \theta > 0$. Show that $Y_{min } - \frac{1}{n}$ is an unbiased estimator of $\theta$.
+
+\textbf{Answer:}
+
+We can find the distrubution of $Y_{min} =n(1-F_{Y}(y)^n)f_y(y)$
+
+$$F_{Y}(y)=1-e^{-(y-\theta)} \leftrightarrow \ P(Y>y)=e^{-(y-\theta)}$$
+
+So,
+$$f_{Y_{min}}(y)=n(e^{-(y-\theta)^n})$$
+And,
+$$E[Y_{min}]=\int^{\infty}_{\theta}yne^{-(y-\theta)^n}$$
+
+Substitute $u=y-\theta$, $du=dy$, $y=u+\theta$.
+
+$$E[y_{min}]=n\int_{0}^{\infty}(u+\theta)e^{nu}du = n \Big[ u \frac{e^{-nu}}{-n}\Big|^{\infty}_{0} -\int_{0}^{\infty} \frac{e^{-nu}}{n}du\Big]  +n\theta\frac{e^{-nu}}{n}^{\infty}_{0}$$
+$$= e^{-nu}_n\theta()+\frac{1}{n} =0 + \frac{1}{n} +\theta = \frac{1}{n}+\theta$$
+
+So,
+
+$$E[Y_{min}-\frac{1}{2}]= E[Y_{min}]--E[\frac{1}{2}]=\frac{1}{2}+\theta - \frac{1}{2}=\theta$$
+
+Thus, $[Y_{min}-\frac{1}{2}]$ is an unbiased estimator for $\theta$.
+
+\section{5.4.20}
+Given a random sample of size n from a Poisson distribution, $\hat{\lambda_1} = X_1$ and $\hat{\lambda_2} = \bar{X}$ are two unbiased estimators for $\lambda$. Calculate the relative efficiency of $\hat{\lambda_1}$ to $\hat{\lambda_2} $.
+\textbf{Answer:}
+$$E[\hat{\lambda_1}] =E[ X_1]=\lambda$$
+Therefore $\hat{\lambda_1}$ is unbiased.
+$$E[\hat{\lambda_2}] =E[ \bar{X}]=E[\frac{\sum X_i}{n}] = \frac{1}{n}\cdot  n E[X]=\lambda$$
+Therefore $\hat{\lambda_2}$ is unbiased.
+$$Var[\hat{\lambda_1}]=Var[X_1] = \lambda$$
+$$Var[\hat{\lambda_2}]=Var[\bar{X}] = \frac{1}{n^2} n Var[X] = \frac{\lambda}{n}$$
+
+The efficiency of the two estimators is the ratio of the variance.
+
+$$Efficiency\ ratio\ \hat{\lambda_1}\ to \ \hat{\lambda_2} = \frac{\frac{\lambda}{n}}{\lambda}= \frac{1}{n}$$
+\section{5.6.6}
+ Let $Y_1,Y_2,...,Y_n$ be a random sample of size n from the pdf
+ 
+ $$f(y;\theta)=\theta y^{\theta - 1}, 0\leq 1 \leq 1$$
+
+Use theorem 5.6.1 to show that $W=\Pi^{n}_{i=1}Y_i$ is a sufficient statistic for $\theta$. Is the maximum likelihood estimator of $\theta$ a function of $W$.
+\newline
+\newline
+\textbf{Answer:}
+$$\Pi_{i=1}^{n}\theta y^{\theta - 1}=\theta^n (\Pi y_i)^{\theta - 1}$$
+By theorem 5.6, we know that $\hat{\theta}$ is a sufficient statistics if and only if there exists functions $g(h(x_1,x_2...x_n,\theta))b(x_1,x_2...x_n)=L_p(\theta)$. For our situation set $g(h(x_1,x_2...x_n)) = \theta^n(\Pi y_i)^{\theta - 1}$ and we can use the constant function and set it to $b(x_1,x_2...x_n)  = 1$. Therefore $\Pi y_i$ is a sufficient statistic.
+\newline
+\newline
+Now we find the M.L.E.
+$$\frac{d}{d\theta}ln(L_p(\theta)) = \frac{d}{d\theta}ln(\theta^n (\Pi y_i)^{\theta - 1})=\frac{n}{\theta} + ln(\Pi iy_i)$$
+Setting this to 0.
+$$\frac{n}{\theta} + \Pi y_i= 0 \leftrightarrow \hat{\theta} = \frac{n}{ln(\Pi y_i)} \leftrightarrow \hat{\theta} = \frac{n}{ln(W)}$$
+
+So, yes the MLE is a function of W. 
+\section{5.7.3}
+ Suppose $Y_1,Y_2,...,Y_n$ is a random sample from the exponential pdf, $fY(y; \lambda) = \lambda e^{-\lambda y}, y > 0$. 
+\begin{enumerate}[label = (\alph*)]
+\item
+Show that $\hat{\lambda}_n = Y_1$ is not consistent for $\lambda$.
+\item
+Show that $\hat{\lambda}_n = \sum^{n}_{i=1}Y_i$ is not consistent for $\theta$.
+\end{enumerate}
+
+\textbf{Answer:}
+
+\begin{enumerate}[label = (\alph*)]
+\item
+We evaluate $\hat{\lambda}_n=\sum Y_1$
+$$P(Y_1>2\lambda)= \int^{\infty}_{2\lambda}\lambda e^{-\lambda y}dy = \Big[  \frac{\lambda e^{-\lambda y}}{-\lambda}\Big]=e^{-2\lambda^2}$$
+We can use the probability inequality,
+$$ P(|y_1 - 2\lambda | < \frac{\lambda}{2})<1- e^{-2\lambda^2} \rightarrow lim_{n \to \infty}P(|y_1 - 2\lambda | < \frac{\lambda}{2})<1$$.
+This is less than one. Therefore the estimator is not consistent. If it were consistent it would converge to 1 in the limit. $hat{\lambda}_n = Y_1$ is not a consistent estimator.
+\item
+We evaluate $\hat{\lambda}_n=\sum Y_i$
+\newline
+We are going to have to use an inequality. It is fairly obvious that $P(\sum Y>2\lambda)\geq P(Y-1>2\lambda)$ And we can then recycle some of the math from last part of this question.
+$$P(Y_i>2\lambda)= \int^{\infty}_{2\lambda}\lambda e^{-\lambda y}dy = \Big[  \frac{\lambda e^{-\lambda y}}{-\lambda}\Big]=e^{-2\lambda^2}$$
+$$ P(|\sum Y_i - 2\lambda | < \frac{\lambda}{2})<P(|y_1 - 2\lambda | < \frac{\lambda}{2})<1- e^{-2\lambda^2} \rightarrow lim_{n \to \infty}P(|\sum y_i - 2\lambda | , \frac{\lambda}{2})<1$$
+Therefore $\hat{\lambda_n}=\sum Y$ is not consistent.
+\end{enumerate}
+
+\section{MONTE CARLO SECTION}
+We are going to expand on the section in the discussion board and simulate a normal distribution and display it on top of the histogram of returns generated from S and P 500 data. 
+
+    
+    \section{Looking at the distribution of 1 Year returns in the SandP
+500}\label{looking-at-the-distribution-of-1-year-returns-in-the-sandp-500}
+
+    We are going to look at the distribution of returns of the s and p 500
+for a 1 year period form 1950 to 2018. We will see if they are log
+normally distributed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{n}{sp500} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}GSPC.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{n}{sp500}\PY{o}{.}\PY{n}{shift}\PY{p}{(}\PY{l+m+mi}{252}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Adj Close}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{sp500}\PY{p}{[}\PY{l+m+mi}{253}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}            Date       Open       High        Low      Close  Adj Close  \textbackslash{}
+        253  1951-01-08  21.000000  21.000000  21.000000  21.000000  21.000000   
+        254  1951-01-09  21.120001  21.120001  21.120001  21.120001  21.120001   
+        255  1951-01-10  20.850000  20.850000  20.850000  20.850000  20.850000   
+        256  1951-01-11  21.190001  21.190001  21.190001  21.190001  21.190001   
+        257  1951-01-12  21.110001  21.110001  21.110001  21.110001  21.110001   
+        
+              Volume   1yYield  
+        253  2780000  1.246291  
+        254  3800000  1.247490  
+        255  3270000  1.227915  
+        256  3490000  1.240632  
+        257  2950000  1.239577  
+\end{Verbatim}
+            
+    We take the log of the 1 year yields.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Lets look at some Summary
+Statistics}\label{lets-look-at-some-summary-statistics}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} count    17060.000000
+        mean         0.073889
+        std          0.154376
+        min         -0.669877
+        25\%         -0.008933
+        50\%          0.096759
+        75\%          0.177204
+        max          0.522201
+        Name: log1yYield, dtype: float64
+\end{Verbatim}
+            
+    We see that the mean of the log returns is .07. This means the average
+return is \(e^{.07}=1.0725081812542165\)
+
+Lets look at a histogram of the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{02}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Is it normally
+distributed?}\label{is-it-normally-distributed}
+
+This looks like it might be normally distributed. However lets do a few
+checks. We will assume the estimates of $\mu = 1.0725 $ and
+\(\sigma = 0.154376\)
+
+We know that if it is normally distributed, then the empiracle rule
+should apply (https://www.investopedia.com/terms/e/empirical-rule.asp)
+
+68\% of data should be within 1 standard deviation of the mean
+(-0.08048700000000002,0.228265).
+
+95\% of data should be within 2 standard deviation of the mean
+(-0.234863000,0.382641).
+
+and 99.7 of data should be within 2 standard deviation of the mean
+(-0.38923900,0.53701700).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.0804870000}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}} \PY{l+m+mf}{0.228265}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{sp500}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2348635}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}} \PY{l+m+mf}{0.382641}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{sp500}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.389239}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}} \PY{l+m+mf}{0.5370170}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{sp500}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.7029228280961183
+0.9423521256931608
+0.9730244916820703
+
+    \end{Verbatim}
+
+    \section{Summary}\label{summary}
+
+In the interval (-0.08048700000000002,0.228265) the data holds 70\% of
+the probability mass. we would expect 68\%.\\
+
+In the interval (-0.234863000,0.382641) the data holds 94.235\% of the
+probability mass. we would expect 95\%.
+
+In the interval (-0.38923900,0.53701700) the data holds 97.3024\% of the
+probability mass. we would expect 99\%.
+
+Using the empiricle rule as a yardstick, we can see that assuming the S
+and P 500 is normally distributed is a bad idea. The actual distribution
+carries more weight in the tails than the normal distribution exhibits.
+I would expect this distribution to have a higher kurtosis number than
+what is expected for the normal distribution also.
+
+\subsection{Simulating the Parametric
+Distribution}\label{simulating-the-parametric-distribution}
+
+This distribution has parameters of mean = 0.073889, and standard
+deviation of 0.154376. We will superimpose this on the histogram above.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{randoms} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{n}{loc} \PY{o}{=}  \PY{l+m+mf}{0.073889}\PY{p}{,} \PY{n}{scale} \PY{o}{=}\PY{l+m+mf}{0.154376}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{17060}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{sp500}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log1yYield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{02}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=} \PY{o}{.}\PY{l+m+mi}{7} \PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{randoms}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{.}\PY{l+m+mi}{02}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
